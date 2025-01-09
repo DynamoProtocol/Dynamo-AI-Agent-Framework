@@ -41,22 +41,29 @@ The middleware bridges the `AgentFactory` smart contract and the GOAT API, enabl
 
 ### Usage
 1. **Call the `requestAgentCreation` Function**:
-   Call the `requestAgentCreation` function on the `AgentFactory` contract:
-   ```solidity
-   agentFactory.requestAgentCreation("Agent Metadata");
-   ```
-   - This emits the `AgentCreationRequested` event, which the middleware listens to.
+   - Interact with the `AgentFactory` contract to initiate the creation of a new agent by calling the `requestAgentCreation` function with the desired metadata:
+     ```solidity
+     agentFactory.requestAgentCreation("Agent Metadata");
+     ```
+   - This action emits the `AgentCreationRequested` event, which the middleware listens for to proceed with agent creation.
+
 
 2. **Middleware Actions**:
-   - The middleware triggers the GOAT API using the event metadata.
-   - Upon receiving the response, it calls the `finalizeAgentCreation` function on the `AgentFactory` contract to register the agent on the blockchain.
+   - Upon detecting the `AgentCreationRequested` event, the middleware:
+     - Sends the provided metadata to the GOAT API to generate the AI agent.
+     - Receives the agent details from the GOAT API.
+     - Calls the `finalizeAgentCreation` function on the `AgentFactory` contract to register the new agent on the blockchain.
 
 3. **Monitor Logs**:
-   - Check the console output for event detections, API responses, and blockchain transactions.
+   - Observe the console output of the middleware for:
+     - Detection of the `AgentCreationRequested` event.
+     - Communication with the GOAT API.
+     - Confirmation of the `finalizeAgentCreation` transaction on the blockchain.
 
 ### Notes
-- Ensure the wallet specified in the `.env` file has sufficient funds to cover gas fees for finalizing agent creation.
-- The middleware requires an active connection to the blockchain and the GOAT API.
+- Ensure the Ethereum wallet specified in the `.env` file has sufficient funds to cover gas fees for blockchain transactions.
+- Maintain an active internet connection to allow the middleware to interact with both the blockchain and the GOAT API.
+- Regularly update dependencies to their latest versions to maintain compatibility and security.
 
 ### Example Workflow
 1. A user triggers `requestAgentCreation` on the `AgentFactory` contract with specific metadata.
