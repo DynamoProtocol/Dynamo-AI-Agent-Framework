@@ -4,22 +4,27 @@ from src.agent_factory import launch_new_agent
 
 def main():
     print("🚀 Dynamo AI Agent Framework Quick Start!")
-    required_env_vars = [
-        "ETH_RPC_URL", "PRIVATE_KEY", "DYNAMO_TOKEN_ADDRESS", 
-        "AGENT_FACTORY_CONTRACT", "AGENT_TOKEN_NAME", "AGENT_TOKEN_SYMBOL"
-    ]
-    missing_vars = [var for var in required_env_vars if var not in os.environ]
-    if missing_vars:
-        print(f"❌ Missing environment variables: {', '.join(missing_vars)}")
+
+    # Load environment variables
+    network = os.getenv("DEFAULT_NETWORK", "ethereum").lower()
+    if network not in ["ethereum", "arbitrum"]:
+        print("❌ Invalid DEFAULT_NETWORK specified. Use 'ethereum' or 'arbitrum'.")
         return
 
-    web3 = Web3(Web3.HTTPProvider(os.environ["ETH_RPC_URL"]))
+    rpc_url = os.getenv(f"{network.upper()}_RPC_URL")
+    token_address = os.getenv(f"{network.upper()}_TOKEN_ADDRESS")
+    if not rpc_url or not token_address:
+        print(f"❌ Missing RPC URL or token address for {network}.")
+        return
+
+    # Initialize Web3
+    web3 = Web3(Web3.HTTPProvider(rpc_url))
     if not web3.isConnected():
-        print("❌ Unable to connect to Ethereum.")
+        print(f"❌ Unable to connect to {network} network.")
         return
 
     try:
-        print("💡 Launching AI Agent...")
+        print(f"💡 Launching AI Agent on {network.capitalize()}...")
         tx_hash = launch_new_agent(
             web3,
             os.environ["PRIVATE_KEY"],
@@ -30,7 +35,7 @@ def main():
         print(f"⏳ Transaction sent! Tx Hash: {tx_hash}")
         receipt = web3.eth.wait_for_transaction_receipt(tx_hash)
         if receipt["status"] == 1:
-            print(f"✅ AI Agent '{os.environ['AGENT_TOKEN_NAME']}' launched!")
+            print(f"✅ AI Agent '{os.environ['AGENT_TOKEN_NAME']}' launched on {network.capitalize()}!")
         else:
             print("❌ Transaction failed.")
     except Exception as e:
