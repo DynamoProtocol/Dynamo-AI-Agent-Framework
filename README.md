@@ -28,17 +28,73 @@ The Dynamo AI Agent Framework enables the deployment of AI-driven agents in dece
    pip install -r requirements.txt
    ```
 
-3. **Configure Environment Variables**
-   Copy the example environment file and update it with your details:
-   ```bash
-   cp configs/.env.example configs/.env
-   ```
-   Update `.env` with:
-   - Ethereum and Arbitrum RPC URLs
-   - Dynamo token addresses for both networks
-   - Private key
-   - Agent factory contract address
-   - Token name and symbol
+3. Configure Environment Variables
+
+   The framework requires a `.env` file to store configuration details for interacting with blockchain networks and deployed contracts. Follow these steps:
+
+   - **Create the `.env` File**:
+     ```bash
+     cp configs/.env.example configs/.env
+     ```
+
+   - **Edit the `.env` File**:
+     Open the `.env` file in a text editor and replace the placeholder values with your actual configuration details:
+
+     - **Ethereum RPC URL**:
+       - Obtain an RPC URL from a provider like [Infura](https://infura.io) or [Alchemy](https://www.alchemy.com).
+       - Replace `YOUR_PROJECT_ID` with your actual project ID:
+         ```plaintext
+         ETH_RPC_URL=https://mainnet.infura.io/v3/YOUR_PROJECT_ID
+         ```
+
+     - **Arbitrum RPC URL**:
+       - Similar to Ethereum, get an RPC URL for Arbitrum from your provider.
+       - Replace `YOUR_PROJECT_ID` accordingly:
+         ```plaintext
+         ARBITRUM_RPC_URL=https://arbitrum.infura.io/v3/YOUR_PROJECT_ID
+         ```
+
+     - **Wallet Private Key**:
+       - Use the private key of your wallet that holds sufficient funds for transaction fees.
+       - **Important**: Keep this key secure and do not share it publicly:
+         ```plaintext
+         PRIVATE_KEY=your_private_key_here
+         ```
+
+     - **Dynamo Token Contract Addresses**:
+       - These are the deployed contract addresses for the Dynamo token:
+         ```plaintext
+         DYNAMO_TOKEN_ADDRESS=0xBfFAF03F35D75417091f0f42de3EC6809ffA51eB
+         ARBITRUM_TOKEN_ADDRESS=0x4d91c0cdf64e995e4391254f0bc19a8a128765b9
+         ```
+
+     - **Agent Factory Contract Address**:
+       - Replace with the actual deployed Agent Factory contract address:
+         ```plaintext
+         AGENT_FACTORY_CONTRACT=0xYourAgentFactoryContractAddress
+         ```
+
+     - **AI Agent Token Configuration**:
+       - Define the name and symbol for your AI agent token:
+         ```plaintext
+         AGENT_TOKEN_NAME=YourAgentTokenName
+         AGENT_TOKEN_SYMBOL=YourAgentTokenSymbol
+         ```
+
+     - **Default Network**:
+       - Set the default blockchain network (`ethereum` or `arbitrum`):
+         ```plaintext
+         DEFAULT_NETWORK=ethereum
+         ```
+
+   - **Save the `.env` File**:
+     After entering all the necessary information, save the `.env` file.
+
+   - **Proceed with Deployment**:
+     With the environment variables configured, continue with the deployment steps as outlined in the **Usage** section of this guide.
+
+   **Note**: Ensure that your `.env` file is not exposed publicly to protect sensitive information like your private key.
+
 
 ---
 
