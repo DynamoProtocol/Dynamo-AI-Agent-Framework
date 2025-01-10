@@ -54,10 +54,18 @@ contract AgentFactory is Ownable {
         return agents;
     }
 
+    /**
+     * @dev Updates the cost of creating an agent. Only callable by the owner.
+     * @param _newCost The new cost in $DYNAMO tokens.
+     */
     function setAgentCreationCost(uint256 _newCost) external onlyOwner {
         agentCreationCost = _newCost;
     }
 
+    /**
+     * @dev Withdraws $DYNAMO tokens from the contract. Only callable by the owner.
+     * @param _amount The amount of $DYNAMO tokens to withdraw.
+     */
     function withdrawDynamo(uint256 _amount) external onlyOwner {
         require(dynamoToken.transfer(msg.sender, _amount), "Withdrawal failed.");
     }
