@@ -4,6 +4,7 @@ async function main() {
     const [deployer] = await hre.ethers.getSigners();
     console.log("Deploying contracts with the account:", deployer.address);
 
+    // Load environment variables
     const dynamoTokenAddress = process.env.DYNAMO_TOKEN_ADDRESS;
     const agentCreationCost = process.env.AGENT_CREATION_COST;
 
@@ -15,6 +16,7 @@ async function main() {
     console.log("DYNAMO Token Address:", dynamoTokenAddress);
     console.log("Agent Creation Cost:", agentCreationCost);
 
+    // Deploy AgentFactory contract
     const AgentFactory = await hre.ethers.getContractFactory("AgentFactory");
     const agentFactory = await AgentFactory.deploy(dynamoTokenAddress, agentCreationCost);
 
