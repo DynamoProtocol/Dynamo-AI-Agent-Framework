@@ -1,6 +1,6 @@
 import os
 from web3 import Web3
-from src.agent_factory import launch_new_agent
+from src.agent_factory import AgentFactory
 
 def main():
     print("🚀 Dynamo AI Agent Framework Quick Start!")
@@ -25,13 +25,12 @@ def main():
 
     try:
         print(f"💡 Launching AI Agent on {network.capitalize()}...")
-        tx_hash = launch_new_agent(
+        agent_factory = AgentFactory(
             web3,
             os.environ["PRIVATE_KEY"],
-            os.environ["AGENT_FACTORY_CONTRACT"],
-            os.environ["AGENT_TOKEN_NAME"],
-            os.environ["AGENT_TOKEN_SYMBOL"]
+            os.environ["AGENT_FACTORY_CONTRACT"]
         )
+        tx_hash = agent_factory.request_agent_creation("Test Metadata")
         print(f"⏳ Transaction sent! Tx Hash: {tx_hash}")
         receipt = web3.eth.wait_for_transaction_receipt(tx_hash)
         if receipt["status"] == 1:
