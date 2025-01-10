@@ -57,6 +57,104 @@ cp configs/.env.example configs/.env
 - Compile and deploy the `AgentFactory.sol` contract to your desired network (Ethereum or Arbitrum).
 - Update the `AGENT_FACTORY_CONTRACT` variable in `.env` with the deployed contract address.
 
+### **Deploying the AgentFactory Contract**
+
+To deploy the `AgentFactory` contract, follow these steps:
+
+1.  **Install Hardhat**:
+    Open your terminal and run the following command to install Hardhat:
+
+    bash
+
+    Copy
+
+    npm install --save-dev hardhat
+
+2.  **Compile the Contract**:
+    Compile the `AgentFactory.sol` contract using Hardhat:
+
+    bash
+
+    Copy
+
+    npx hardhat compile
+
+3.  **Create a Deployment Script**:
+    Create a new file named `deploy.js` in the `scripts` folder and add the following code:
+
+    javascript
+
+    Copy
+
+    const hre \= require("hardhat");
+
+    async function main() {
+        const \[deployer\] \= await hre.ethers.getSigners();
+        console.log("Deploying contracts with the account:", deployer.address);
+
+        const AgentFactory \= await hre.ethers.getContractFactory("AgentFactory");
+        const agentFactory \= await AgentFactory.deploy("0xDynamoTokenAddress", 1000000000000000000);
+
+        await agentFactory.deployed();
+        console.log("AgentFactory deployed to:", agentFactory.address);
+    }
+
+    main().catch((error) \=> {
+        console.error(error);
+        process.exit(1);
+    });
+
+4.  **Run the Deployment Script**:
+    Deploy the contract to your desired network (e.g., Ethereum or Arbitrum) using Hardhat:
+
+    bash
+
+    Copy
+
+    npx hardhat run scripts/deploy.js \--network <network\_name\>
+
+5.  **Update `.env` File**:
+    After deployment, update the `AGENT_FACTORY_CONTRACT` variable in your `.env` file with the deployed contract address:
+
+    plaintext
+
+    Copy
+
+    AGENT\_FACTORY\_CONTRACT=0xYourDeployedContractAddress
+
+* * *
+
+### **Example Deployment to Ethereum Mainnet**
+
+1.  Ensure your `.env` file contains the correct Ethereum RPC URL and private key.
+2.  Run the deployment script:
+
+    bash
+
+    Copy
+
+    npx hardhat run scripts/deploy.js \--network mainnet
+
+### **Example Deployment to Arbitrum Testnet**
+
+1.  Ensure your `.env` file contains the correct Arbitrum RPC URL and private key.
+2.  Run the deployment script:
+
+    bash
+
+    Copy
+
+    npx hardhat run scripts/deploy.js \--network arbitrum\_testnet
+
+* * *
+
+### **Notes**
+
+-   Replace `0xDynamoTokenAddress` with the actual address of the $DYNAMO token contract.
+-   Ensure your wallet has sufficient funds (ETH or ARB) to cover gas fees for deployment.
+-   Use the appropriate network configuration in your `hardhat.config.js` file.
+
+
 ### 2. Running the Framework
 
 #### Start the Middleware:
