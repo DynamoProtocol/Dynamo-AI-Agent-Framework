@@ -5,6 +5,25 @@
 
 The middleware acts as a bridge between the AgentFactory smart contract and the GOAT API. It listens for events emitted by the AgentFactory contract, triggers the GOAT API to generate AI agents, and finalizes the agent creation process on the blockchain.
 
+## Middleware Workflow
+
+```plaintext
++-------------------+       +-------------------+       +-------------------+
+| AgentFactory      |       | Middleware        |       | GOAT API          |
+| Smart Contract    |       | (middleware.js)   |       |                   |
++-------------------+       +-------------------+       +-------------------+
+        |                           |                           |
+        | AgentCreationRequested    |                           |
+        |-------------------------->|                           |
+        |                           | Generate Agent            |
+        |                           |-------------------------->|
+        |                           |                           |
+        |                           | Agent Data                |
+        |                           |<--------------------------|
+        | FinalizeAgentCreation     |                           |
+        |<--------------------------|                           |
+```
+
 ## File Location
 
 The middleware script is located in the `middleware/middleware.js` file.
