@@ -1,4 +1,8 @@
 [
+  // WARNING: This is a placeholder ABI generated from the AgentFactory.sol source code.
+  // Replace this file with the actual ABI after deploying the AgentFactory contract.
+  // The actual ABI can be found in: artifacts/contracts/AgentFactory.sol/AgentFactory.json
+
   {
     "inputs": [
       {
