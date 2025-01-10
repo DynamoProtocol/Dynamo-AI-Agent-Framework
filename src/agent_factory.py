@@ -20,8 +20,8 @@ class AgentFactory:
         try:
             transaction = self.contract.functions.requestAgentCreation(metadata).buildTransaction({
                 "from": self.address,
-                "gas": 2000000,
-                "gasPrice": self.web3.toWei("50", "gwei"),
+                "gas": int(os.getenv("GAS_LIMIT", 2000000)),
+                "gasPrice": self.web3.toWei(os.getenv("GAS_PRICE", "50"), "gwei"),
                 "nonce": self.web3.eth.getTransactionCount(self.address),
             })
             signed_tx = self.web3.eth.account.signTransaction(transaction, self.private_key)
@@ -35,8 +35,8 @@ class AgentFactory:
         try:
             transaction = self.contract.functions.finalizeAgentCreation(agent_address, metadata).buildTransaction({
                 "from": self.address,
-                "gas": 2000000,
-                "gasPrice": self.web3.toWei("50", "gwei"),
+                "gas": int(os.getenv("GAS_LIMIT", 2000000)),
+                "gasPrice": self.web3.toWei(os.getenv("GAS_PRICE", "50"), "gwei"),
                 "nonce": self.web3.eth.getTransactionCount(self.address),
             })
             signed_tx = self.web3.eth.account.signTransaction(transaction, self.private_key)
@@ -64,8 +64,8 @@ class AgentFactory:
         try:
             transaction = self.contract.functions.setAgentCreationCost(new_cost).buildTransaction({
                 "from": self.address,
-                "gas": 2000000,
-                "gasPrice": self.web3.toWei("50", "gwei"),
+                "gas": int(os.getenv("GAS_LIMIT", 2000000)),
+                "gasPrice": self.web3.toWei(os.getenv("GAS_PRICE", "50"), "gwei"),
                 "nonce": self.web3.eth.getTransactionCount(self.address),
             })
             signed_tx = self.web3.eth.account.signTransaction(transaction, self.private_key)
@@ -79,8 +79,8 @@ class AgentFactory:
         try:
             transaction = self.contract.functions.withdrawDynamo(amount).buildTransaction({
                 "from": self.address,
-                "gas": 2000000,
-                "gasPrice": self.web3.toWei("50", "gwei"),
+                "gas": int(os.getenv("GAS_LIMIT", 2000000)),
+                "gasPrice": self.web3.toWei(os.getenv("GAS_PRICE", "50"), "gwei"),
                 "nonce": self.web3.eth.getTransactionCount(self.address),
             })
             signed_tx = self.web3.eth.account.signTransaction(transaction, self.private_key)
