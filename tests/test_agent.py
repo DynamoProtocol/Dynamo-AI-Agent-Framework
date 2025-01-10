@@ -1,23 +1,21 @@
 import unittest
-from src.lst_agent import LstAgent  # Adjusted to reflect the actual implementation
+from src.lst_agent import DynamoAgent
 
-class TestLstAgent(unittest.TestCase):
-    def test_get_balances(self):  # Renamed to match lst_agent.py's expected functionality
-        agent = LstAgent("TestAgent")
-        # Mock user_address and expected balances
+class TestDynamoAgent(unittest.TestCase):
+    def test_get_balances(self):
+        agent = DynamoAgent("TestAgent", "https://mainnet.infura.io/v3/YOUR_PROJECT_ID", "YOUR_PRIVATE_KEY", "YOUR_DEEPSEEK_API_KEY")
         user_address = "0xMockAddress"
-        balances = agent.get_balances(user_address)  # Adjusted method name
-        self.assertIsInstance(balances, dict)  # Updated to check for expected return type
+        balances = agent.get_balances(user_address)
+        self.assertIsInstance(balances, dict)
 
     def test_perform_stake(self):
-        agent = LstAgent("TestAgent")
-        # Mock staking parameters
+        agent = DynamoAgent("TestAgent", "https://mainnet.infura.io/v3/YOUR_PROJECT_ID", "YOUR_PRIVATE_KEY", "YOUR_DEEPSEEK_API_KEY")
         staking_details = {
             "token_address": "0xTokenAddress",
             "amount": 1000
         }
         result = agent.perform_stake(staking_details)
-        self.assertTrue(result)  # Check if staking was successful
+        self.assertTrue(result)
 
 if __name__ == "__main__":
     unittest.main()
