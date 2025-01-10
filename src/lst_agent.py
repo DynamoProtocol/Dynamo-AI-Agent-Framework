@@ -1,6 +1,7 @@
 from web3 import Web3
 from .deepseek import DeepSeekAPI
 import logging
+import os
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
