@@ -145,6 +145,13 @@ tx_hash = agent.provide_liquidity({"pool_address": "0xPoolAddress", "amount": 10
 - Check your wallet balance for sufficient ETH/ARB to cover gas fees.
 - Verify the correctness of the `AgentFactory` contract address.
 
+## Roadmap
+
+- [ ] Add support for additional blockchain networks (e.g., Polygon, Binance Smart Chain).
+- [ ] Implement advanced portfolio analysis features.
+- [ ] Add a user interface for managing AI agents.
+- [ ] Integrate with more DeFi protocols for staking and liquidity provisioning.
+
 ## Contributing
 
 We welcome contributions to the Dynamo AI Agent Framework! Follow these steps to contribute:
