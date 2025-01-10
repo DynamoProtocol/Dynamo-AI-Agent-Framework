@@ -57,8 +57,6 @@ cp configs/.env.example configs/.env
 - Compile and deploy the `AgentFactory.sol` contract to your desired network (Ethereum or Arbitrum).
 - Update the `AGENT_FACTORY_CONTRACT` variable in `.env` with the deployed contract address.
 
-### **Deploying the AgentFactory Contract**
-
 To deploy the `AgentFactory` contract, follow these steps:
 
 1.  **Install Hardhat**:
