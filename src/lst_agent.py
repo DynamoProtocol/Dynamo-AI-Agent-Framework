@@ -1,5 +1,9 @@
 from web3 import Web3
-from deepseek import DeepSeekAPI
+from .deepseek import DeepSeekAPI
+import logging
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 class DynamoAgent:
     def __init__(self, name, eth_rpc_url, private_key, deepseek_api_key):
@@ -18,7 +22,7 @@ class DynamoAgent:
                 "DAI": 350.0  # Placeholder for token balance via contract interaction
             }
         except Exception as e:
-            print(f"Error fetching balances: {e}")
+            logger.error(f"Error fetching balances: {e}")
             return None
 
     def perform_stake(self, staking_details):
@@ -29,8 +33,8 @@ class DynamoAgent:
                 transaction = {
                     'to': token_address,
                     'value': self.web3.toWei(amount, 'ether'),
-                    'gas': 21000,
-                    'gasPrice': self.web3.toWei('50', 'gwei'),
+                    'gas': int(os.getenv("GAS_LIMIT", 21000)),
+                    'gasPrice': self.web3.toWei(os.getenv("GAS_PRICE", "50"), "gwei"),
                     'nonce': self.web3.eth.getTransactionCount(self.address),
                 }
                 signed_tx = self.web3.eth.account.signTransaction(transaction, self.private_key)
@@ -38,7 +42,7 @@ class DynamoAgent:
                 return self.web3.toHex(tx_hash)
             return False
         except Exception as e:
-            print(f"Error performing stake: {e}")
+            logger.error(f"Error performing stake: {e}")
             return False
 
     def analyze_portfolio(self, portfolio_data):
@@ -46,5 +50,5 @@ class DynamoAgent:
             response = self.deepseek_api.analyze(portfolio_data)
             return response.get("recommendations")
         except Exception as e:
-            print(f"Error analyzing portfolio: {e}")
+            logger.error(f"Error analyzing portfolio: {e}")
             return None
