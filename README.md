@@ -5,32 +5,25 @@ The Dynamo AI Agent Framework is a cutting-edge platform designed to deploy AI-d
 ## Features
 
 ### Staking APY Monitoring:
-
 - Automates token staking based on real-time APY data.
 - Supports Ethereum and Arbitrum networks.
 
 ### Portfolio Analysis:
-
 - Utilizes AI (via DeepSeek) to provide investment strategy recommendations.
 - Integrates with DeFi protocols for real-time data.
 
 ### Liquidity Provisioning:
-
 - Automates liquidity provision in DeFi pools.
 - Optimizes returns by monitoring market conditions.
 
 ## Installation
 
-Follow these steps to set up the Dynamo AI Agent Framework:
-
 ### 1. Request $DYNAMO Tokens
-
 - Join the Dynamo Discord server.
 - Request $DYNAMO tokens for your desired network (Ethereum or Arbitrum).
 - Once you receive the tokens, configure the framework to use the appropriate network.
 
 ### 2. Clone the Repository:
-
 ```bash
 git clone https://github.com/DynamoProtocol/Dynamo-AI-Agent-Framework.git
 cd Dynamo-AI-Agent-Framework
@@ -128,49 +121,38 @@ Example:
 tx_hash = agent.provide_liquidity({"pool_address": "0xPoolAddress", "amount": 1000})
 ```
 
+# Advanced Features
+
+## Withdraw $DYNAMO Tokens
+
+- The owner can withdraw `$DYNAMO` tokens from the AgentFactory contract.
+
+Example:
+
+```python
+tx_hash = agent_factory.withdraw_dynamo(amount)
+```
+
+## Set Agent Creation Cost
+
+- The owner can update the cost of creating an agent.
+
+Example:
+
+```python
+tx_hash = agent_factory.set_agent_creation_cost(new_cost)
+```
+
 # Troubleshooting
 
-## Connection Issues
-
-- Verify the RPC URL in `.env` is correct.
-- Ensure your Ethereum node is accessible.
-
-## API Errors
-
-- Check the GOAT and DeepSeek API logs for errors.
-- Ensure the API keys in `.env` are valid.
-
-## Transaction Failures
-
-- Check your wallet balance for sufficient ETH/ARB to cover gas fees.
-- Verify the correctness of the `AgentFactory` contract address.
-
-# Roadmap
-
-- Add support for additional blockchain networks (e.g., Polygon, Binance Smart Chain).
-- Implement advanced portfolio analysis features.
-- Add a user interface for managing AI agents.
-- Integrate with more DeFi protocols for staking and liquidity provisioning.
+- **Connection Issues**: Verify the RPC URL in `.env` is correct.
+- **API Errors**: Check the GOAT and DeepSeek API logs for errors.
+- **Transaction Failures**: Ensure your wallet has sufficient ETH/ARB for gas fees.
 
 # Contributing
 
-We welcome contributions to the Dynamo AI Agent Framework! Follow these steps to contribute:
-
-## Fork the Repository
-
-- Fork the repository on GitHub.
-
-## Create a New Branch
-
-- Create a new branch for your feature or bugfix:
-
-```bash
-git checkout -b feature/your-feature-name
-```
-
-## Submit a Pull Request
-
-- Push your changes to the branch and submit a pull request with a detailed description of your changes.
+- Fork the repository and create a new branch for your feature or bugfix.
+- Submit a pull request with a detailed description of your changes.
 
 # License
 
@@ -178,4 +160,5 @@ This project is licensed under the MIT License. See the LICENSE file for details
 
 # Support
 
-For support or questions, please contact the development team or open an issue on the GitHub repository.
+For support or questions, contact the development team or open an issue on GitHub.
+
