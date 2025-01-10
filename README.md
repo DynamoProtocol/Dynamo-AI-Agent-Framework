@@ -1,4 +1,3 @@
-
 # Dynamo AI Agent Framework
 
 The Dynamo AI Agent Framework is a cutting-edge platform designed to deploy AI-driven agents for automating tasks in decentralized finance (DeFi) ecosystems. It supports Ethereum and Arbitrum networks, offering flexibility and scalability for users. Key features include staking APY monitoring, portfolio analysis, and liquidity provisioning.
@@ -24,133 +23,149 @@ The Dynamo AI Agent Framework is a cutting-edge platform designed to deploy AI-d
 
 Follow these steps to set up the Dynamo AI Agent Framework:
 
-### Prerequisites
+### 1. Request $DYNAMO Tokens
 
-- Python 3.8 or higher.
-- Node.js (for middleware functionality).
-- Docker (optional, for containerized deployment).
+- Join the Dynamo Discord server.
+- Request $DYNAMO tokens for your desired network (Ethereum or Arbitrum).
+- Once you receive the tokens, configure the framework to use the appropriate network.
 
-### Steps
-
-#### Clone the Repository:
+### 2. Clone the Repository:
 
 ```bash
 git clone https://github.com/DynamoProtocol/Dynamo-AI-Agent-Framework.git
 cd Dynamo-AI-Agent-Framework
 ```
 
-#### Install Dependencies:
+### 3\. Install Dependencies:
 
-- Install Python dependencies:
+-   Install Python dependencies:
 
-```bash
-pip install -r requirements.txt
-```
+bash
 
-- Install Node.js dependencies (for middleware):
+Copy
 
-```bash
+pip install \-r requirements.txt
+
+-   Install Node.js dependencies (for middleware):
+
+bash
+
+Copy
+
 cd middleware
 npm install
 cd ..
-```
 
-#### Configure Environment Variables:
+### 4\. Configure Environment Variables:
 
-- Copy the example `.env` file:
+-   Copy the example `.env` file:
 
-```bash
+bash
+
+Copy
+
 cp configs/.env.example configs/.env
-```
 
-- Edit `configs/.env` and fill in the required values:
-  - RPC URLs for Ethereum and Arbitrum.
-  - Wallet private key.
-  - Contract addresses for `AgentFactory` and `$DYNAMO` tokens.
-  - API keys for GOAT and DeepSeek.
+-   Edit `configs/.env` and fill in the required values:
+    -   RPC URLs for Ethereum and Arbitrum.
+    -   Wallet private key.
+    -   Contract addresses for `AgentFactory` and $DYNAMO tokens.
+    -   API keys for GOAT and DeepSeek.
 
-#### Deploy the AgentFactory Contract:
+### 5\. Deploy the AgentFactory Contract:
 
-- Compile and deploy the `AgentFactory.sol` contract to your desired network (Ethereum or Arbitrum).
-- Update the `AGENT_FACTORY_CONTRACT` variable in `.env` with the deployed contract address.
+-   Compile and deploy the `AgentFactory.sol` contract to your desired network (Ethereum or Arbitrum).
+-   Update the `AGENT_FACTORY_CONTRACT` variable in `.env` with the deployed contract address.
 
-#### Run the Middleware:
+### 6\. Run the Middleware:
 
-- Navigate to the middleware directory:
+-   Navigate to the middleware directory:
 
-```bash
+bash
+
+Copy
+
 cd middleware
-```
 
-- Start the middleware script:
+-   Start the middleware script:
 
-```bash
+bash
+
+Copy
+
 node middleware.js
-```
 
-#### Launch an AI Agent:
+### 7\. Launch an AI Agent:
 
-- Use the `quick_start.py` script to launch an AI agent:
+-   Use the `quick_start.py` script to launch an AI agent:
 
-```bash
-python examples/quick_start.py
-```
+bash
+
+Copy
+
+python examples/quick\_start.py
 
 ## Usage
 
 ### Staking APY Monitoring:
 
-- Automate token staking based on real-time APY data.
+-   Automate token staking based on real-time APY data.
 
 Example:
 
-```python
-tx_hash = agent.perform_stake({"token_address": "0xTokenAddress", "amount": 1.0})
-```
+python
+
+Copy
+
+tx\_hash \= agent.perform\_stake({"token\_address": "0xTokenAddress", "amount": 1.0})
 
 ### Portfolio Analysis:
 
-- Analyze portfolios and get investment recommendations.
+-   Analyze portfolios and get investment recommendations.
 
 Example:
 
-```python
-recommendations = agent.analyze_portfolio({"tokens": ["ETH", "DAI"], "values": [1.2, 350]})
-```
+python
+
+Copy
+
+recommendations \= agent.analyze\_portfolio({"tokens": \["ETH", "DAI"\], "values": \[1.2, 350\]})
 
 ### Liquidity Provisioning:
 
-- Automate liquidity provision in DeFi pools.
+-   Automate liquidity provision in DeFi pools.
 
 Example:
 
-```python
-tx_hash = agent.provide_liquidity({"pool_address": "0xPoolAddress", "amount": 1000})
-```
+python
+
+Copy
+
+tx\_hash \= agent.provide\_liquidity({"pool\_address": "0xPoolAddress", "amount": 1000})
 
 ## Troubleshooting
 
 ### Connection Issues:
 
-- Verify the RPC URL in `.env` is correct.
-- Ensure your Ethereum node is accessible.
+-   Verify the RPC URL in `.env` is correct.
+-   Ensure your Ethereum node is accessible.
 
 ### API Errors:
 
-- Check the GOAT and DeepSeek API logs for errors.
-- Ensure the API keys in `.env` are valid.
+-   Check the GOAT and DeepSeek API logs for errors.
+-   Ensure the API keys in `.env` are valid.
 
 ### Transaction Failures:
 
-- Check your wallet balance for sufficient ETH/ARB to cover gas fees.
-- Verify the correctness of the `AgentFactory` contract address.
+-   Check your wallet balance for sufficient ETH/ARB to cover gas fees.
+-   Verify the correctness of the `AgentFactory` contract address.
 
 ## Roadmap
 
-- [ ] Add support for additional blockchain networks (e.g., Polygon, Binance Smart Chain).
-- [ ] Implement advanced portfolio analysis features.
-- [ ] Add a user interface for managing AI agents.
-- [ ] Integrate with more DeFi protocols for staking and liquidity provisioning.
+-   Add support for additional blockchain networks (e.g., Polygon, Binance Smart Chain).
+-   Implement advanced portfolio analysis features.
+-   Add a user interface for managing AI agents.
+-   Integrate with more DeFi protocols for staking and liquidity provisioning.
 
 ## Contributing
 
@@ -158,19 +173,21 @@ We welcome contributions to the Dynamo AI Agent Framework! Follow these steps to
 
 ### Fork the Repository:
 
-- Fork the repository on GitHub.
+-   Fork the repository on GitHub.
 
 ### Create a New Branch:
 
-- Create a new branch for your feature or bugfix:
+-   Create a new branch for your feature or bugfix:
 
-```bash
-git checkout -b feature/your-feature-name
-```
+bash
+
+Copy
+
+git checkout \-b feature/your-feature-name
 
 ### Submit a Pull Request:
 
-- Push your changes to the branch and submit a pull request with a detailed description of your changes.
+-   Push your changes to the branch and submit a pull request with a detailed description of your changes.
 
 ## License
 
