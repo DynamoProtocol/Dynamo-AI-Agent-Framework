@@ -5,29 +5,19 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract AgentFactory is Ownable {
-    // Event emitted when a new agent creation is requested
     event AgentCreationRequested(address indexed creator, string metadata);
-
-    // Event emitted when an agent creation is finalized
     event AgentCreated(address indexed agentAddress, string metadata, address indexed creator);
 
-    // Struct to store agent details
     struct Agent {
         address agentAddress;
         string metadata;
         address creator;
     }
 
-    // Array to store all agents
     Agent[] public agents;
-
-    // Mapping to quickly verify if an address is an agent
     mapping(address => bool) public isAgent;
 
-    // $DYNAMO token contract
     IERC20 public dynamoToken;
-
-    // Cost to create an agent (in $DYNAMO tokens)
     uint256 public agentCreationCost;
 
     constructor(address _dynamoToken, uint256 _agentCreationCost) {
@@ -40,7 +30,6 @@ contract AgentFactory is Ownable {
             dynamoToken.transferFrom(msg.sender, address(this), agentCreationCost),
             "Payment failed: Insufficient $DYNAMO tokens or allowance."
         );
-
         emit AgentCreationRequested(msg.sender, metadata);
     }
 
@@ -54,7 +43,6 @@ contract AgentFactory is Ownable {
         }));
 
         isAgent[agentAddress] = true;
-
         emit AgentCreated(agentAddress, metadata, msg.sender);
     }
 
