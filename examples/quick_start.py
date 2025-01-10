@@ -12,7 +12,7 @@ def main():
         return
 
     rpc_url = os.getenv(f"{network.upper()}_RPC_URL")
-    token_address = os.getenv(f"{network.upper()}_TOKEN_ADDRESS")
+    token_address = os.getenv(f"{network.upper()}_DYNAMO_TOKEN_ADDRESS")
     if not rpc_url or not token_address:
         print(f"❌ Missing RPC URL or token address for {network}.")
         return
