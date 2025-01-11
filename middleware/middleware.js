@@ -20,6 +20,12 @@ const PRIVATE_KEY = process.env.PRIVATE_KEY;
 const GOAT_API_URL = process.env.GOAT_API_URL;
 const GOAT_API_KEY = process.env.GOAT_API_KEY;
 
+// Validate environment variables
+if (!CONTRACT_ADDRESS || !PROVIDER_URL || !PRIVATE_KEY || !GOAT_API_URL || !GOAT_API_KEY) {
+    logger.error("❌ Missing required environment variables.");
+    process.exit(1);
+}
+
 // Initialize Ethereum provider and wallet
 const provider = new ethers.providers.JsonRpcProvider(PROVIDER_URL);
 const wallet = new ethers.Wallet(PRIVATE_KEY, provider);
@@ -41,12 +47,13 @@ contract.on("AgentCreationRequested", async (creator, metadata, event) => {
             { metadata },
             { headers: { Authorization: `Bearer ${GOAT_API_KEY}` } }
         );
-        const agentData = response.data;
 
-        logger.info("GOAT API response:", agentData);
+        // Validate API response
+        if (!response.data.agentAddress || !response.data.agentMetadata) {
+            throw new Error("Invalid API response: Missing agentAddress or agentMetadata");
+        }
 
-        // Extract agent details
-        const { agentAddress, agentMetadata } = agentData;
+        const { agentAddress, agentMetadata } = response.data;
 
         // Finalize agent creation on blockchain
         const tx = await contract.finalizeAgentCreation(agentAddress, agentMetadata);
