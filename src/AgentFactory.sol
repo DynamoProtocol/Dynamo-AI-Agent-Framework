@@ -3,8 +3,9 @@ pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
-contract AgentFactory is Ownable {
+contract AgentFactory is Ownable, ReentrancyGuard {
     event AgentCreationRequested(address indexed creator, string metadata);
     event AgentCreated(address indexed agentAddress, string metadata, address indexed creator);
 
@@ -25,7 +26,7 @@ contract AgentFactory is Ownable {
         agentCreationCost = _agentCreationCost;
     }
 
-    function requestAgentCreation(string memory metadata) external {
+    function requestAgentCreation(string memory metadata) external nonReentrant {
         require(
             dynamoToken.transferFrom(msg.sender, address(this), agentCreationCost),
             "Payment failed: Insufficient $DYNAMO tokens or allowance."
@@ -33,7 +34,7 @@ contract AgentFactory is Ownable {
         emit AgentCreationRequested(msg.sender, metadata);
     }
 
-    function finalizeAgentCreation(address agentAddress, string memory metadata) external {
+    function finalizeAgentCreation(address agentAddress, string memory metadata) external onlyOwner {
         require(!isAgent[agentAddress], "Agent already exists");
 
         agents.push(Agent({
@@ -50,23 +51,20 @@ contract AgentFactory is Ownable {
         return agents.length;
     }
 
-    function getAllAgents() external view returns (Agent[] memory) {
-        return agents;
+    function getAllAgents(uint256 startIndex, uint256 endIndex) external view returns (Agent[] memory) {
+        require(startIndex < endIndex && endIndex <= agents.length, "Invalid index range");
+        Agent[] memory result = new Agent[](endIndex - startIndex);
+        for (uint256 i = startIndex; i < endIndex; i++) {
+            result[i - startIndex] = agents[i];
+        }
+        return result;
     }
 
-    /**
-     * @dev Updates the cost of creating an agent. Only callable by the owner.
-     * @param _newCost The new cost in $DYNAMO tokens.
-     */
     function setAgentCreationCost(uint256 _newCost) external onlyOwner {
         agentCreationCost = _newCost;
     }
 
-    /**
-     * @dev Withdraws $DYNAMO tokens from the contract. Only callable by the owner.
-     * @param _amount The amount of $DYNAMO tokens to withdraw.
-     */
-    function withdrawDynamo(uint256 _amount) external onlyOwner {
+    function withdrawDynamo(uint256 _amount) external onlyOwner nonReentrant {
         require(dynamoToken.transfer(msg.sender, _amount), "Withdrawal failed.");
     }
 }
