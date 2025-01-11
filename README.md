@@ -1,6 +1,6 @@
 # Dynamo AI Agent Framework
 
-The Dynamo AI Agent Framework is a cutting-edge platform designed to deploy AI-driven agents for automating tasks in decentralized finance (DeFi) ecosystems. It supports Ethereum and Arbitrum networks, offering flexibility and scalability for users. Key features include staking APY monitoring, portfolio analysis, and liquidity provisioning.
+The Dynamo AI Agent Framework is a cutting-edge platform designed to deploy AI-driven agents for automating tasks in decentralized finance (DeFi) ecosystems. It supports Ethereum and Arbitrum networks, offering flexibility and scalability for users. Key features include staking APY monitoring, portfolio analysis, and liquidity provisioning. [To get started: Read this to on board.](DeveloperOnboarding.md)
 
 ## Features
 
