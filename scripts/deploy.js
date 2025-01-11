@@ -16,16 +16,21 @@ async function main() {
     console.log("DYNAMO Token Address:", dynamoTokenAddress);
     console.log("Agent Creation Cost:", agentCreationCost);
 
-    // Deploy AgentFactory contract
-    const AgentFactory = await hre.ethers.getContractFactory("AgentFactory");
-    const agentFactory = await AgentFactory.deploy(dynamoTokenAddress, agentCreationCost);
+    try {
+        // Deploy AgentFactory contract
+        const AgentFactory = await hre.ethers.getContractFactory("AgentFactory");
+        const agentFactory = await AgentFactory.deploy(dynamoTokenAddress, agentCreationCost);
 
-    await agentFactory.deployed();
+        await agentFactory.deployed();
 
-    console.log("AgentFactory deployed to:", agentFactory.address);
-    console.log("✅ Deployment successful!");
-    console.log("Update AGENT_FACTORY_CONTRACT in your .env file with the following address:");
-    console.log(agentFactory.address);
+        console.log("AgentFactory deployed to:", agentFactory.address);
+        console.log("✅ Deployment successful!");
+        console.log("Update AGENT_FACTORY_CONTRACT in your .env file with the following address:");
+        console.log(agentFactory.address);
+    } catch (error) {
+        console.error("❌ Deployment failed:", error);
+        process.exit(1);
+    }
 }
 
 main()
