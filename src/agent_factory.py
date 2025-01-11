@@ -1,5 +1,5 @@
-from web3 import Web3
 import os
+from web3 import Web3
 
 class AgentFactory:
     def __init__(self, web3, private_key, contract_address):
